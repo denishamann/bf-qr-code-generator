@@ -1,0 +1,26 @@
+{
+  "name": "bf-qr-code-generator",
+  "version": "1.0.0",
+  "description": "QR Code Generator for Basic Fit",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "esbuild src/main.ts --bundle --outfile=dist/main.js --sourcemap"
+  },
+  "keywords": [
+    "qr-code",
+    "generator",
+    "basic-fit",
+    "typescript"
+  ],
+  "author": "Denis Hamann",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/qrcode": "^1.5.6",
+    "esbuild": "^0.25.11",
+    "http-server": "^14.1.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}

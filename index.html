@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Fit QR Code Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Basic Fit QR Code</h1>
+
+      <!-- Configuration Form -->
+      <div id="configSection">
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input type="text" id="cardNumber" placeholder="V00123456" />
+        </div>
+
+        <div class="form-group">
+          <label for="deviceId">Device ID</label>
+          <input
+            type="text"
+            id="deviceId"
+            placeholder="a1b2c3d4-5e6f-7890-abcd-ef1234567890"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="constant">Constant</label>
+          <input type="text" id="constant" placeholder="3M9" />
+        </div>
+
+        <button id="generateBtn" class="btn">Generate QR Code</button>
+        <button id="editBtn" class="btn btn-secondary" style="display: none">
+          Edit Configuration
+        </button>
+      </div>
+
+      <!-- QR Code Display -->
+      <div id="qrSection" style="display: none">
+        <canvas id="qrCanvas"></canvas>
+        <p id="countdown" class="countdown"></p>
+        <button id="backBtn" class="btn btn-secondary">
+          Back to Configuration
+        </button>
+      </div>
+    </div>
+    <script src="dist/main.js"></script>
+  </body>
+</html>
