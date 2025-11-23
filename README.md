@@ -23,7 +23,7 @@ Where:
 
 - **GM2**: QR code format identifier
 - **CARD_NUMBER**: Your card identifier (e.g., V00123456)
-- **CONSTANT**: A fixed constant value (e.g., 3M9)
+- **CONSTANT**: A fixed constant value (e.g., 3M9) that changes everytime you kill & relaunch the BF app.
 - **TIMESTAMP**: Unix timestamp (seconds since epoch)
 - **HASH**: Last 8 characters of SHA-256 hash (uppercase)
 

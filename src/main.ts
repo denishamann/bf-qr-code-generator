@@ -25,6 +25,7 @@ async function generateQRCodeData(cardNumber: string, constant: string, deviceId
 
 async function displayQRCode(cardNumber: string, constant: string, deviceId: string) {
   const canvas = document.getElementById('qrCanvas') as HTMLCanvasElement;
+  const qrDataElement = document.getElementById('qrData') as HTMLParagraphElement;
   const qrData = await generateQRCodeData(cardNumber, constant, deviceId);
   
   await QRCode.toCanvas(canvas, qrData, {
@@ -35,6 +36,8 @@ async function displayQRCode(cardNumber: string, constant: string, deviceId: str
       light: '#FFFFFF'
     }
   });
+  
+  qrDataElement.textContent = qrData;
 }
 
 let refreshInterval: number | null = null;
