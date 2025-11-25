@@ -18,11 +18,16 @@
         </div>
 
         <div class="form-group">
-          <label for="deviceId">Device ID</label>
+          <label for="deviceId"
+            >Device ID
+            <small class="help-text"
+              >Must be in UPPERCASE with dashes</small
+            ></label
+          >
           <input
             type="text"
             id="deviceId"
-            placeholder="a1b2c3d4-5e6f-7890-abcd-ef1234567890"
+            placeholder="A1B2C3D4-5E6F-7890-ABCD-EF1234567890"
           />
         </div>
 
@@ -41,7 +46,9 @@
       <div id="qrSection" style="display: none">
         <canvas id="qrCanvas"></canvas>
         <p id="qrData" class="qr-data"></p>
-        <p id="countdown" class="countdown"></p>
+        <div class="progress-container">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
         <button id="backBtn" class="btn btn-secondary">
           Back to Configuration
         </button>

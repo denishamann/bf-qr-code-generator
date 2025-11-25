@@ -41,36 +41,32 @@ async function displayQRCode(cardNumber: string, constant: string, deviceId: str
 }
 
 let refreshInterval: number | null = null;
-let countdownInterval: number | null = null;
 
 function startQRRefresh(cardNumber: string, constant: string, deviceId: string) {
-  displayQRCode(cardNumber, constant, deviceId);
+  const progressBar = document.getElementById('progressBar') as HTMLDivElement;
+  const REFRESH_INTERVAL = 5000;
   
-  let secondsLeft = 5;
-  const countdownElement = document.getElementById('countdown') as HTMLParagraphElement;
-  
-  function updateCountdown() {
-    countdownElement.textContent = `Refreshing in ${secondsLeft}s...`;
-    secondsLeft--;
-    
-    if (secondsLeft < 0) {
-      secondsLeft = 5;
-      displayQRCode(cardNumber, constant, deviceId);
-    }
+  function resetAndAnimate() {
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '100%';
+    void progressBar.offsetWidth;
+    progressBar.style.transition = 'width 5s linear';
+    progressBar.style.width = '0%';
   }
   
-  updateCountdown();
-  countdownInterval = window.setInterval(updateCountdown, 1000);
+  displayQRCode(cardNumber, constant, deviceId);
+  resetAndAnimate();
+  
+  refreshInterval = window.setInterval(() => {
+    displayQRCode(cardNumber, constant, deviceId);
+    resetAndAnimate();
+  }, REFRESH_INTERVAL);
 }
 
 function stopQRRefresh() {
   if (refreshInterval) {
     clearInterval(refreshInterval);
     refreshInterval = null;
-  }
-  if (countdownInterval) {
-    clearInterval(countdownInterval);
-    countdownInterval = null;
   }
 }
 
