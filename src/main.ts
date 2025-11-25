@@ -63,6 +63,13 @@ function startQRRefresh(cardNumber: string, constant: string, deviceId: string) 
   }, REFRESH_INTERVAL);
 }
 
+function skipToNextQR(cardNumber: string, constant: string, deviceId: string) {
+  if (refreshInterval) {
+    clearInterval(refreshInterval);
+    startQRRefresh(cardNumber, constant, deviceId);
+  }
+}
+
 function stopQRRefresh() {
   if (refreshInterval) {
     clearInterval(refreshInterval);
@@ -80,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const generateBtn = document.getElementById('generateBtn') as HTMLButtonElement;
   const backBtn = document.getElementById('backBtn') as HTMLButtonElement;
+  const skipQrBtn = document.getElementById('skipQrBtn') as HTMLButtonElement;
   
   cardNumberInput.value = localStorage.getItem(STORAGE_KEYS.CARD_NUMBER) || '';
   deviceIdInput.value = localStorage.getItem(STORAGE_KEYS.DEVICE_ID) || '';
@@ -109,5 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
     stopQRRefresh();
     qrSection.style.display = 'none';
     configSection.style.display = 'block';
+  });
+  
+  skipQrBtn.addEventListener('click', () => {
+    const cardNumber = cardNumberInput.value.trim();
+    const deviceId = deviceIdInput.value.trim();
+    const constant = constantInput.value.trim();
+    skipToNextQR(cardNumber, constant, deviceId);
   });
 });
