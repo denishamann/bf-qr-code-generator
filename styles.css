@@ -57,10 +57,6 @@ body {
     font-size: 0.9rem !important;
   }
 
-  .help-text {
-    font-size: 0.75rem !important;
-  }
-
   .btn {
     padding: 10px 24px !important;
     font-size: 0.95rem !important;
@@ -127,11 +123,6 @@ h1 {
 .form-group input:focus {
   outline: none;
   border-color: #667eea;
-}
-
-.help-text {
-  color: #666;
-  font-style: italic;
 }
 
 .btn {
