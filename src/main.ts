@@ -89,9 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const backBtn = document.getElementById('backBtn') as HTMLButtonElement;
   const skipQrBtn = document.getElementById('skipQrBtn') as HTMLButtonElement;
   
-  cardNumberInput.value = localStorage.getItem(STORAGE_KEYS.CARD_NUMBER) || '';
-  deviceIdInput.value = localStorage.getItem(STORAGE_KEYS.DEVICE_ID) || '';
-  constantInput.value = localStorage.getItem(STORAGE_KEYS.CONSTANT) || '';
+  // Checks for URL parameters first, then fall back to localStorage
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlCardNumber = urlParams.get('cardNumber');
+  const urlDeviceId = urlParams.get('deviceId');
+  const urlConstant = urlParams.get('constant');
+  
+  cardNumberInput.value = urlCardNumber || localStorage.getItem(STORAGE_KEYS.CARD_NUMBER) || '';
+  deviceIdInput.value = urlDeviceId || localStorage.getItem(STORAGE_KEYS.DEVICE_ID) || '';
+  constantInput.value = urlConstant || localStorage.getItem(STORAGE_KEYS.CONSTANT) || '';
   
   generateBtn.addEventListener('click', () => {
     const cardNumber = cardNumberInput.value.trim();
