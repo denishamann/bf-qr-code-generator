@@ -47,6 +47,22 @@
       </div>
 
       <button id="generateBtn" class="btn">Generate QR Code</button>
+      <button id="debugBtn" class="btn-debug" type="button">Mode debug</button>
+    </div>
+
+    <!-- Debug / original QR Display -->
+    <div id="qrSectionDebug" style="display: none">
+      <canvas id="qrCanvasDebug"></canvas>
+      <p id="qrDataDebug" class="qr-data"></p>
+      <div class="progress-container">
+        <div id="progressBarDebug" class="progress-bar"></div>
+      </div>
+      <div class="skip-controls">
+        <button id="skipQrBtnDebug" class="btn-skip" type="button">Force Next Refresh</button>
+      </div>
+      <button id="backBtnDebug" class="btn btn-secondary" type="button">
+        Back to Configuration
+      </button>
     </div>
 
     <!-- QR Code Display -->

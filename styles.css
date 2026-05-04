@@ -125,6 +125,105 @@ button {
   background: #f3f4f6;
 }
 
+.btn-debug {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: var(--c-text-muted);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.btn-debug:hover {
+  color: var(--c-text);
+}
+
+/* ------------------------------------------------------------------
+   Debug / original QR display screen
+   ------------------------------------------------------------------ */
+#qrSectionDebug {
+  max-width: 480px;
+  margin: 0 auto;
+  padding:
+    calc(env(safe-area-inset-top) + 24px) 20px
+    calc(env(safe-area-inset-bottom) + 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+#qrCanvasDebug {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+#qrSectionDebug .qr-data {
+  padding: 8px 10px;
+  background: var(--c-bg);
+  border-radius: 6px;
+  font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  word-break: break-all;
+  color: var(--c-text);
+  border: 1px solid var(--c-border);
+  text-align: center;
+  margin: 0;
+}
+
+#qrSectionDebug .progress-container {
+  width: 100%;
+  height: 6px;
+  background-color: var(--c-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#qrSectionDebug .progress-bar {
+  height: 100%;
+  background: var(--c-purple);
+  border-radius: 999px;
+  width: 100%;
+  transition: width 5s linear;
+}
+
+#qrSectionDebug .skip-controls {
+  display: flex;
+  width: 100%;
+}
+
+#qrSectionDebug .btn-skip {
+  width: 100%;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--c-purple);
+  border: 1px solid var(--c-purple);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+#qrSectionDebug .btn-skip:hover {
+  background: var(--c-purple);
+  color: var(--c-white);
+}
+
 /* ------------------------------------------------------------------
    QR display screen — full-screen layout per spec
    ------------------------------------------------------------------ */
