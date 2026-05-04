@@ -2,56 +2,97 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basic Fit QR Code Generator</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Basic-Fit QR</title>
+
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#5b2c91" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- iOS install / standalone -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Basic-Fit" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="icon" type="image/svg+xml" href="icon.svg" />
+
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Basic Fit QR Code</h1>
+    <!-- Configuration Form -->
+    <div id="configSection">
+      <h1>Configuration</h1>
 
-      <!-- Configuration Form -->
-      <div id="configSection">
-        <div class="form-group">
-          <label for="cardNumber">Card Number</label>
-          <input type="text" id="cardNumber" placeholder="V00123456" />
-        </div>
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" placeholder="V00123456" />
+      </div>
 
-        <div class="form-group">
-          <label for="deviceId">Device ID</label>
-          <input
-            type="text"
-            id="deviceId"
-            placeholder="A1B2C3D4-5E6F-7890-ABCD-EF1234567890"
-          />
-        </div>
+      <div class="form-group">
+        <label for="deviceId">Device ID</label>
+        <input
+          type="text"
+          id="deviceId"
+          placeholder="A1B2C3D4-5E6F-7890-ABCD-EF1234567890"
+        />
+      </div>
 
-        <div class="form-group">
-          <label for="constant">Constant</label>
-          <input type="text" id="constant" placeholder="3M9" />
-        </div>
+      <div class="form-group">
+        <label for="constant">Constant</label>
+        <input type="text" id="constant" placeholder="3M9" />
+      </div>
 
-        <button id="generateBtn" class="btn">Generate QR Code</button>
-        <button id="editBtn" class="btn btn-secondary" style="display: none">
-          Edit Configuration
+      <button id="generateBtn" class="btn">Generate QR Code</button>
+    </div>
+
+    <!-- QR Code Display -->
+    <div id="qrSection" style="display: none">
+      <div class="qr-header">
+        <button id="closeBtn" class="icon-btn" type="button" aria-label="Fermer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+          </svg>
         </button>
       </div>
 
-      <!-- QR Code Display -->
-      <div id="qrSection" style="display: none">
-        <canvas id="qrCanvas"></canvas>
-        <p id="qrData" class="qr-data"></p>
-        <div class="progress-container">
-          <div id="progressBar" class="progress-bar"></div>
+      <div class="qr-body">
+        <div class="qr-card-wrap">
+          <div class="qr-inner">
+            <canvas id="qrCanvas"></canvas>
+            <span class="qr-badge">Passeport Membre</span>
+          </div>
         </div>
-        <div class="skip-controls">
-          <button id="skipQrBtn" class="btn-skip">Force Next Refresh</button>
-        </div>
-        <button id="backBtn" class="btn btn-secondary">
-          Back to Configuration
+        <h1 class="qr-title">Ton code QR</h1>
+        <p class="qr-description">
+          Scanne le code QR pour accéder à tout ce dont tu as besoin dans ton
+          compte. Retrouve ici tes infos et avantages en un coup d'œil.
+        </p>
+      </div>
+
+      <div class="qr-cta-wrap">
+        <button id="helpBtn" class="btn-cta" type="button">
+          Comment utiliser le code QR
         </button>
       </div>
     </div>
+
     <script src="dist/main.js"></script>
+    <script>
+      const isLocal =
+        location.hostname === "localhost" || location.hostname === "127.0.0.1";
+
+      if ("serviceWorker" in navigator && !isLocal) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("service-worker.js")
+            .catch((err) => console.warn("SW registration failed", err));
+        });
+      }
+    </script>
   </body>
 </html>

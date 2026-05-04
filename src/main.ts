@@ -25,50 +25,34 @@ async function generateQRCodeData(cardNumber: string, constant: string, deviceId
 
 async function displayQRCode(cardNumber: string, constant: string, deviceId: string) {
   const canvas = document.getElementById('qrCanvas') as HTMLCanvasElement;
-  const qrDataElement = document.getElementById('qrData') as HTMLParagraphElement;
   const qrData = await generateQRCodeData(cardNumber, constant, deviceId);
-  
+
   await QRCode.toCanvas(canvas, qrData, {
-    width: 300,
-    margin: 2,
+    width: 360,
+    margin: 1,
     color: {
       dark: '#000000',
       light: '#FFFFFF'
     }
   });
-  
-  qrDataElement.textContent = qrData;
+
+  canvas.style.width = '';
+  canvas.style.height = '';
 }
 
 let refreshInterval: number | null = null;
 
 function startQRRefresh(cardNumber: string, constant: string, deviceId: string) {
-  const progressBar = document.getElementById('progressBar') as HTMLDivElement;
   const REFRESH_INTERVAL = 5000;
-  
-  function resetAndAnimate() {
-    progressBar.style.transition = 'none';
-    progressBar.style.width = '100%';
-    void progressBar.offsetWidth;
-    progressBar.style.transition = 'width 5s linear';
-    progressBar.style.width = '0%';
-  }
-  
+
   displayQRCode(cardNumber, constant, deviceId);
-  resetAndAnimate();
-  
+
   refreshInterval = window.setInterval(() => {
     displayQRCode(cardNumber, constant, deviceId);
-    resetAndAnimate();
   }, REFRESH_INTERVAL);
 }
 
-function skipToNextQR(cardNumber: string, constant: string, deviceId: string) {
-  if (refreshInterval) {
-    clearInterval(refreshInterval);
-    startQRRefresh(cardNumber, constant, deviceId);
-  }
-}
+
 
 function stopQRRefresh() {
   if (refreshInterval) {
@@ -86,8 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const constantInput = document.getElementById('constant') as HTMLInputElement;
   
   const generateBtn = document.getElementById('generateBtn') as HTMLButtonElement;
-  const backBtn = document.getElementById('backBtn') as HTMLButtonElement;
-  const skipQrBtn = document.getElementById('skipQrBtn') as HTMLButtonElement;
+  const closeBtn = document.getElementById('closeBtn') as HTMLButtonElement;
+  const helpBtn = document.getElementById('helpBtn') as HTMLButtonElement;
   
   // Checks for URL parameters first, then fall back to localStorage
   const urlParams = new URLSearchParams(window.location.search);
@@ -119,16 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
     startQRRefresh(cardNumber, constant, deviceId);
   });
   
-  backBtn.addEventListener('click', () => {
+  closeBtn.addEventListener('click', () => {
     stopQRRefresh();
     qrSection.style.display = 'none';
     configSection.style.display = 'block';
   });
-  
-  skipQrBtn.addEventListener('click', () => {
-    const cardNumber = cardNumberInput.value.trim();
-    const deviceId = deviceIdInput.value.trim();
-    const constant = constantInput.value.trim();
-    skipToNextQR(cardNumber, constant, deviceId);
+
+  helpBtn.addEventListener('click', () => {
+    // Stubbed per design — wire up a real help flow when ready.
   });
 });
