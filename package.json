@@ -4,7 +4,8 @@
   "description": "QR Code Generator for Basic Fit",
   "main": "dist/main.js",
   "scripts": {
-    "build": "esbuild src/main.ts --bundle --outfile=dist/main.js --sourcemap"
+    "build": "esbuild src/main.ts --bundle --outfile=dist/main.js --sourcemap",
+    "dev": "node scripts/dev.mjs"
   },
   "keywords": [
     "qr-code",
