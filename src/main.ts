@@ -10,16 +10,21 @@ type ViewConfig = {
   canvasId: string;
   qrDataId?: string;
   progressBarId?: string;
+  // true → bar starts full and empties (countdown, original behavior)
+  // false/undefined → bar starts empty and fills up (Basic-Fit app behavior)
+  progressFromFull?: boolean;
 };
 
 const VIEW_NEW: ViewConfig = {
-  canvasId: 'qrCanvas'
+  canvasId: 'qrCanvas',
+  progressBarId: 'qrProgressBar'
 };
 
 const VIEW_DEBUG: ViewConfig = {
   canvasId: 'qrCanvasDebug',
   qrDataId: 'qrDataDebug',
-  progressBarId: 'progressBarDebug'
+  progressBarId: 'progressBarDebug',
+  progressFromFull: true
 };
 
 async function generateHash(cardNr: string, constant: string, iat: number, deviceId: string): Promise<string> {
@@ -72,11 +77,13 @@ function startQRRefresh(view: ViewConfig, cardNumber: string, constant: string, 
 
   function resetAndAnimate() {
     if (!progressBar) return;
+    const start = view.progressFromFull ? '100%' : '0%';
+    const end = view.progressFromFull ? '0%' : '100%';
     progressBar.style.transition = 'none';
-    progressBar.style.width = '100%';
+    progressBar.style.width = start;
     void progressBar.offsetWidth;
     progressBar.style.transition = 'width 5s linear';
-    progressBar.style.width = '0%';
+    progressBar.style.width = end;
   }
 
   displayQRCode(view, cardNumber, constant, deviceId);
@@ -115,8 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const debugBtn = document.getElementById('debugBtn') as HTMLButtonElement;
   const closeBtn = document.getElementById('closeBtn') as HTMLButtonElement;
   const helpBtn = document.getElementById('helpBtn') as HTMLButtonElement;
+  const feedbackBtn = document.getElementById('feedbackBtn') as HTMLButtonElement;
   const backBtnDebug = document.getElementById('backBtnDebug') as HTMLButtonElement;
   const skipQrBtnDebug = document.getElementById('skipQrBtnDebug') as HTMLButtonElement;
+  const qrCardNumberLabel = document.getElementById('qrCardNumber') as HTMLSpanElement;
 
   // Checks for URL parameters first, then fall back to localStorage
   const urlParams = new URLSearchParams(window.location.search);
@@ -155,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
   generateBtn.addEventListener('click', () => {
     const form = readForm();
     if (!form) return;
+    qrCardNumberLabel.textContent = form.cardNumber;
     configSection.style.display = 'none';
     qrSectionDebug.style.display = 'none';
     qrSection.style.display = 'flex';
@@ -175,6 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   helpBtn.addEventListener('click', () => {
     // Stubbed per design — wire up a real help flow when ready.
+  });
+
+  feedbackBtn.addEventListener('click', () => {
+    // Stubbed per design — wire up a real feedback flow when ready.
   });
 
   skipQrBtnDebug.addEventListener('click', () => {

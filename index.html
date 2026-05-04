@@ -77,22 +77,32 @@
       </div>
 
       <div class="qr-body">
-        <div class="qr-card-wrap">
-          <div class="qr-inner">
-            <canvas id="qrCanvas"></canvas>
-            <span class="qr-badge">Passeport Membre</span>
+        <div class="qr-stack">
+          <div class="qr-card-wrap">
+            <div class="qr-inner">
+              <canvas id="qrCanvas"></canvas>
+              <span class="qr-badge">Cardnumber <span id="qrCardNumber"></span></span>
+            </div>
+          </div>
+          <div class="qr-progress">
+            <div id="qrProgressBar" class="qr-progress-bar"></div>
           </div>
         </div>
-        <h1 class="qr-title">Ton code QR</h1>
-        <p class="qr-description">
-          Scanne le code QR pour accéder à tout ce dont tu as besoin dans ton
-          compte. Retrouve ici tes infos et avantages en un coup d'œil.
-        </p>
+        <div class="qr-text">
+          <h1 class="qr-title">Votre code QR</h1>
+          <p class="qr-description">
+            Scannez ce code QR pour entrer dans le club ou pour profiter des
+            Options. Présentez votre code QR à environ 20 cm du scanner.
+          </p>
+        </div>
       </div>
 
       <div class="qr-cta-wrap">
         <button id="helpBtn" class="btn-cta" type="button">
           Comment utiliser le code QR
+        </button>
+        <button id="feedbackBtn" class="btn-feedback" type="button">
+          Donne nous ton avis
         </button>
       </div>
     </div>
