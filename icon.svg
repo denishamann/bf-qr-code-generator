@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#5b2c91"/>
+  <text
+    x="50%"
+    y="54%"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+    font-weight="800"
+    font-size="240"
+    fill="#ffffff"
+    letter-spacing="-6"
+  >BF</text>
+</svg>

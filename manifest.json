@@ -1,0 +1,26 @@
+{
+  "name": "Basic-Fit QR",
+  "short_name": "Basic-Fit",
+  "description": "Basic-Fit gym QR pass",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#5b2c91",
+  "categories": ["fitness", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
